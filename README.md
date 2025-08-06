@@ -84,3 +84,36 @@ Darth Vader: *hss-klsshh* Coruscant currently has 22°C with scattered clouds...
 - Imperial March theme on startup
 
 May the Force serve you well, young apprentice!
+
+
+
+
+
+
+
+## Character Persona
+
+The assistant maintains Darth Vader's iconic persona through:
+- Imperial/Star Wars terminology ("Rebel Scum", "Young Jedi")
+- Mechanical breathing sound effects (*hss-klsshh*)
+- Menacing and authoritative responses
+- References to Star Wars lore (Death Star, Imperial Fleet)
+- Condescending yet sophisticated dialogue
+
+## Voice Limitations Note
+
+The TTS system uses local voice synthesis which has limitations:
+- Voice quality depends on system voices
+- Pitch modification provides basic Vader-like effect
+- For optimal experience:
+  - Windows systems generally provide deeper voices
+  - Consider cloud TTS services for better quality
+  - Pre-record key phrases for authenticity
+
+## Contribution Guidelines
+
+We welcome enhancements from the Dark Side:
+1. Report issues with Imperial intelligence
+2. Submit pull requests for new features
+3. Suggest improvements to Vader's persona
+4. Add more Star Wars knowledge to RAG context
