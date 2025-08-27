@@ -57,3 +57,22 @@ def create_few_shot_prompt(user_input, n=3):
     User: {user_input}
     Vader: 
     """
+
+def create_dynamic_prompt(user_input, conversation_history=None):
+    """Create a dynamic prompt that adapts based on conversation history"""
+    history_text = ""
+    if conversation_history and len(conversation_history) > 0:
+        history_text = "Previous conversation:\n"
+        for exchange in conversation_history[-3:]:  # Last 3 exchanges
+            history_text += f"User: {exchange['user']}\nVader: {exchange['vader']}\n"
+        history_text += "\n"
+    
+    return f"""
+    {VADER_SYSTEM_PROMPT}
+    
+    {history_text}
+    Current Query: {user_input}
+    
+    Respond as Darth Vader:
+    """
+

@@ -1,7 +1,11 @@
 import os
 import google.generativeai as genai
 from dotenv import load_dotenv
-from prompts.user_prompts import create_zero_shot_prompt, create_one_shot_prompt, create_few_shot_prompt
+from prompts.user_prompts import (
+    create_zero_shot_prompt, create_one_shot_prompt, 
+    create_few_shot_prompt, create_dynamic_prompt,
+    
+)
 
 # Load environment variables
 load_dotenv()
@@ -22,17 +26,21 @@ def main():
     techniques = {
         '1': ('Zero-Shot', create_zero_shot_prompt),
         '2': ('One-Shot', create_one_shot_prompt),
-        '3': ('Few-Shot', create_few_shot_prompt)
+        '3': ('Few-Shot', create_few_shot_prompt),
+        '4': ('Dynamic', lambda input: create_dynamic_prompt(input, conversation_history)),
+        
     }
     
     print("\nSelect prompting technique:")
     for key, (name, _) in techniques.items():
         print(f"{key}: {name}")
     
-    technique_choice = input("Enter choice (1-3): ") or '1'
+    technique_choice = input("Enter choice (1-4): ") or '1'
     technique_name, prompt_func = techniques.get(technique_choice, techniques['1'])
     
     print(f"\nUsing {technique_name} prompting. Your insolence will be remembered.")
+    
+    conversation_history = []
     
     while True:
         user_input = input("\nYou: ")
@@ -45,7 +53,15 @@ def main():
         
         # Process input
         response = model.generate_content(prompt)
-        print(f"Vader: {response.text}")
+        vader_response = response.text
+        
+        # Store conversation history for dynamic prompting
+        conversation_history.append({
+            'user': user_input,
+            'vader': vader_response
+        })
+        
+        print(f"Vader: {vader_response}")
 
 if __name__ == "__main__":
     main()
