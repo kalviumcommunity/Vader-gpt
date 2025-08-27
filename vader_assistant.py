@@ -14,13 +14,36 @@ load_dotenv()
 # Configure Gemini
 genai.configure(api_key=os.getenv('GEMINI_API_KEY'))
 
-def initialize_model():
-    """Initialize the Gemini model"""
-    model = genai.GenerativeModel('gemini-2.5-flash-lite')
+def initialize_model(generation_config=None):
+    """Initialize the Gemini model with optional generation config"""
+    if generation_config is None:
+        generation_config = {
+            "temperature": 0.7,
+            "top_p": 0.9,
+            "top_k": 40,
+            "max_output_tokens": 1024,
+        }
+    
+    model = genai.GenerativeModel(
+        'gemini-2.5-flash-lite',
+        generation_config=generation_config
+    )
     return model
 
 def main():
-    model = initialize_model()
+    # Configure generation parameters
+    temperature = float(input("Enter temperature (0.0-1.0, default 0.7): ") or 0.7)
+    top_p = float(input("Enter top-p (0.0-1.0, default 0.9): ") or 0.9)
+    top_k = int(input("Enter top-k (1-100, default 40): ") or 40)
+    
+    generation_config = {
+        "temperature": temperature,
+        "top_p": top_p,
+        "top_k": top_k,
+        "max_output_tokens": 1024,
+    }
+    
+    model = initialize_model(generation_config)
     print("Vader-GPT Initialized. I am altering the deal. Pray I don't alter it any further.")
     
     # Check if user wants to run evaluation
