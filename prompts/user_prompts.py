@@ -41,3 +41,19 @@ def create_one_shot_prompt(user_input):
     Vader: 
     """
 
+def create_few_shot_prompt(user_input, n=3):
+    """Create a few-shot prompt with multiple examples"""
+    examples_text = ""
+    for i, example in enumerate(EXAMPLES[:n]):
+        examples_text += f"User: {example['input']}\nVader: {example['output']}\n\n"
+    
+    return f"""
+    {VADER_SYSTEM_PROMPT}
+    
+    Example Interactions:
+    {examples_text}
+    
+    Now respond to this query:
+    User: {user_input}
+    Vader: 
+    """

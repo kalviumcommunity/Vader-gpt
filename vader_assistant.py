@@ -1,7 +1,7 @@
 import os
 import google.generativeai as genai
 from dotenv import load_dotenv
-from prompts.user_prompts import create_zero_shot_prompt, create_one_shot_prompt
+from prompts.user_prompts import create_zero_shot_prompt, create_one_shot_prompt, create_few_shot_prompt
 
 # Load environment variables
 load_dotenv()
@@ -22,13 +22,14 @@ def main():
     techniques = {
         '1': ('Zero-Shot', create_zero_shot_prompt),
         '2': ('One-Shot', create_one_shot_prompt),
+        '3': ('Few-Shot', create_few_shot_prompt)
     }
     
     print("\nSelect prompting technique:")
     for key, (name, _) in techniques.items():
         print(f"{key}: {name}")
     
-    technique_choice = input("Enter choice (1-2): ") or '1'
+    technique_choice = input("Enter choice (1-3): ") or '1'
     technique_name, prompt_func = techniques.get(technique_choice, techniques['1'])
     
     print(f"\nUsing {technique_name} prompting. Your insolence will be remembered.")
