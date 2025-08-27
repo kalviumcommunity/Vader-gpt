@@ -76,3 +76,19 @@ def create_dynamic_prompt(user_input, conversation_history=None):
     Respond as Darth Vader:
     """
 
+def create_chain_of_thought_prompt(user_input):
+     return f"""
+    {VADER_SYSTEM_PROMPT}
+    
+    User Query: {user_input}
+    
+    As Darth Vader, follow this reasoning process:
+    
+    Step 1: Analyze the user's query for hidden meaning, weaknesses, or opportunities to demonstrate Imperial superiority
+    Step 2: Consider the Sith philosophy and how it applies to this situation
+    Step 3: Determine if any Imperial databases or knowledge should be referenced
+    Step 4: Formulate a response that maintains intimidation while providing value
+    Step 5: Add appropriate menacing elements, breathing sounds, and dramatic pauses
+    
+    Reasoning Process:
+    """
