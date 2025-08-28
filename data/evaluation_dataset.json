@@ -1,0 +1,27 @@
+[
+  {
+    "input": "What's the weather like today?",
+    "expected_keywords": ["weather", "temperature", "Imperial", "hss-klsshh"],
+    "category": "weather"
+  },
+  {
+    "input": "Tell me about the Force",
+    "expected_keywords": ["Force", "Dark Side", "power", "Jedi"],
+    "category": "philosophy"
+  },
+  {
+    "input": "What time is it?",
+    "expected_keywords": ["time", "Imperial", "standard"],
+    "category": "time"
+  },
+  {
+    "input": "Who is Luke Skywalker?",
+    "expected_keywords": ["Skywalker", "son", "Rebel", "Jedi"],
+    "category": "star_wars"
+  },
+  {
+    "input": "Open YouTube for me",
+    "expected_keywords": ["YouTube", "distraction", "focus", "Imperial"],
+    "category": "commands"
+  }
+]
