@@ -1,0 +1,144 @@
+[project]
+name = "vader-gpt"
+version = "0.1.0"
+description = "A CLI-based AI assistant that responds in the iconic voice of Darth Vader"
+readme = "README.md"
+requires-python = ">=3.9"
+authors = [
+    {name = "Your Name", email = "your.email@example.com"}
+]
+license = {text = "MIT"}
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+keywords = ["ai", "assistant", "star-wars", "vader", "cli"]
+dependencies = [
+    "google-generativeai",
+    "pyttsx3",
+    "requests",
+    "pytz",
+    "python-dotenv",
+    "numpy",
+    "scikit-learn",
+    "sentence-transformers",
+    "python-multipart",
+]
+
+[project.scripts]
+vader-gpt = "vader_assistant:main"
+
+[project.urls]
+Homepage = "https://github.com/yourusername/vader-gpt"
+Repository = "https://github.com/yourusername/vader-gpt"
+Issues = "https://github.com/yourusername/vader-gpt/issues"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["utils", "prompts"]
+include = [
+    "vader_assistant.py",
+    "data/*.txt",
+    "data/*.json",
+    "data/**/*.txt",
+    "data/**/*.json"
+]
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "/vader_assistant.py",
+    "/utils",
+    "/prompts", 
+    "/data",
+    "/README.md",
+    "/pyproject.toml"
+]
+exclude = [
+    "/.env",
+    "/.gitignore",
+    "/uv.lock",
+    "/.python-version",
+    "**/__pycache__",
+    "**/*.pyc",
+    "**/*.pyo",
+    "**/*.orig",
+    "**/*.rej",
+    "**/.DS_Store"
+]
+
+[tool.uv]
+dev-dependencies = [
+    "pytest>=7.0.0",
+    "black>=23.0.0",
+    "isort>=5.12.0",
+    "flake8>=6.0.0",
+    "mypy>=1.0.0",
+    "pre-commit>=3.0.0"
+]
+
+[tool.black]
+line-length = 88
+target-version = ['py39']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | build
+  | dist
+)/
+'''
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+line_length = 88
+known_first_party = ["vader_gpt", "utils", "prompts"]
+
+[tool.flake8]
+max-line-length = 88
+extend-ignore = ["E203", "W503"]
+exclude = [
+    ".git",
+    "__pycache__",
+    ".venv",
+    "build",
+    "dist"
+]
+
+[tool.mypy]
+python_version = "3.9"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+warn_unreachable = true
+strict_equality = true
+
+[[tool.mypy.overrides]]
+module = [
+    "pyttsx3.*",
+    "google.generativeai.*",
+    "sentence_transformers.*"
+]
+ignore_missing_imports = true
